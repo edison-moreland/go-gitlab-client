@@ -6,7 +6,7 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
-	"github.com/plouc/go-gitlab-client/gitlab"
+	"github.com/edison-moreland/go-gitlab-client/v3/gitlab"
 )
 
 func confirmAction(question, abortMessage string, autoConfirm bool) bool {

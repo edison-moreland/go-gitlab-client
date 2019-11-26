@@ -6,7 +6,7 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/olekukonko/tablewriter"
-	"github.com/plouc/go-gitlab-client/gitlab"
+	"github.com/edison-moreland/go-gitlab-client/v3/gitlab"
 )
 
 func Badges(w io.Writer, format string, collection *gitlab.BadgeCollection) {

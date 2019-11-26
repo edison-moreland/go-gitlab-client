@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/fatih/color"
-	"github.com/plouc/go-gitlab-client/gitlab"
+	"github.com/edison-moreland/go-gitlab-client/v3/gitlab"
 	"gopkg.in/yaml.v2"
 	"io"
 )

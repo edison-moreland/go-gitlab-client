@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/plouc/go-gitlab-client/cli/cmd"
+	"github.com/edison-moreland/go-gitlab-client/v3/cli/cmd"
 )
 
 func main() {
