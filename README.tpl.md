@@ -89,7 +89,7 @@ Visit the docs at http://godoc.org/github.com/edison-moreland/go-gitlab-client/v
 - [x] Get a single commit
 - [x] Get references a commit is pushed to
 - [ ] Cherry pick a commit
-- [ ] Get the diff of a commit
+- [x] Get the diff of a commit
 - [ ] Get the comments of a commit
 - [ ] Post comment to commit
 - [x] List the statuses of a commit

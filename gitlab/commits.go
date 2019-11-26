@@ -13,7 +13,7 @@ const (
 	ProjectCommitDiffApiPath          = "/projects/:id/repository/commits/:sha/diff"
 	ProjectCommitRefsApiPath          = "/projects/:id/repository/commits/:sha/refs"
 	ProjectCommitStatusesApiPath      = "/projects/:id/repository/commits/:sha/statuses"
-	ProjectCommitMaergeRequestsApiPath = "/projects/:id/repository/commits/:sha/merge_requests"
+	ProjectCommitMergeRequestsApiPath = "/projects/:id/repository/commits/:sha/merge_requests"
 )
 
 type MinimalCommit struct {
@@ -237,12 +237,40 @@ func (g *Gitlab) ProjectCommitStatuses(projectId, sha string, o *PaginationOptio
 }
 
 func (g *Gitlab) ProjectCommitMergeRequests(projectId, sha string, o *PaginationOptions) (*MergeRequestCollection, *ResponseMeta, error) {
-	u := g.ResourceUrlQ(ProjectCommitMaergeRequestsApiPath, map[string]string{
+	u := g.ResourceUrlQ(ProjectCommitMergeRequestsApiPath, map[string]string{
 		":id":  projectId,
 		":sha": sha,
 	}, o)
 
 	collection := new(MergeRequestCollection)
+
+	contents, meta, err := g.buildAndExecRequest("GET", u.String(), nil)
+	if err == nil {
+		err = json.Unmarshal(contents, &collection.Items)
+	}
+
+	return collection, meta, err
+}
+
+type ChangeItemCollection struct {
+	Items []*ChangeItem
+}
+
+func (c *ChangeItemCollection) RenderJson(w io.Writer) error {
+	return renderJson(w, c.Items)
+}
+
+func (c *ChangeItemCollection) RenderYaml(w io.Writer) error {
+	return renderYaml(w, c.Items)
+}
+
+func (g *Gitlab) ProjectCommitDiff(projectId, sha string, o *PaginationOptions) (*ChangeItemCollection, *ResponseMeta, error) {
+	u := g.ResourceUrlQ(ProjectCommitDiffApiPath, map[string]string{
+		":id":  projectId,
+		":sha": sha,
+	}, o)
+
+	collection := new(ChangeItemCollection)
 
 	contents, meta, err := g.buildAndExecRequest("GET", u.String(), nil)
 	if err == nil {
