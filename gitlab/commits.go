@@ -94,6 +94,9 @@ type CommitsOptions struct {
 	Path string `url:"path,omitempty"`
 
 	// Only commits after or on this date will be returned in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ
+	RefName string `url:"ref_name,omitempty"`
+
+	// Only commits after or on this date will be returned in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ
 	Since string `url:"since,omitempty"`
 
 	// Only commits before or on this date will be returned in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ
@@ -154,7 +157,7 @@ func (g *Gitlab) ProjectCommit(projectId, commitSha string) (*Commit, *ResponseM
 }
 
 type CommitRef struct {
-	Name   string `json:"name" yaml:"name"`
+	Name string `json:"name" yaml:"name"`
 	Type string `json:"type" yaml:"type"`
 }
 
